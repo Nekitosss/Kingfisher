@@ -100,7 +100,7 @@ public struct KFImage: SwiftUI.View {
                     if self.cancelOnDisappear { binder.cancel() }
                 }
             }
-        }.onAppear { [unowned binder] in
+        }.onAppear { [weak binder] in
             if !binder.loadingOrSuccessed {
                 binder.start()
             }
