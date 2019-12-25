@@ -96,13 +96,13 @@ public struct KFImage: SwiftUI.View {
                     }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                .onDisappear { [unowned binder = self.binder] in
-                    if self.cancelOnDisappear { binder.cancel() }
+                .onDisappear { [weak binder = self.binder] in
+                    if self.cancelOnDisappear { binder?.cancel() }
                 }
             }
         }.onAppear { [weak binder] in
-            if !binder.loadingOrSuccessed {
-                binder.start()
+            if binder?.loadingOrSuccessed == false {
+                binder?.start()
             }
         }
     }
